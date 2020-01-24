@@ -1,0 +1,55 @@
+﻿<Window x:Class="VRPSolverDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:VRPSolverDemo"
+        mc:Ignorable="d"
+        Title="VRPSolverDemo" Height="600" Width="800" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="3*" />
+            <ColumnDefinition Width="1*" />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="9*"/>
+            <RowDefinition Height="1*"/>
+        </Grid.RowDefinitions>
+
+        <!--求解按钮和文件输入按钮-->
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+            <Button x:Name="Solve"  Width="100" Click="Solve_Click">求解</Button>
+            <Button x:Name="FileInput" Width="100" Click="FileInput_Click">文件输入</Button>
+        </StackPanel>
+        
+        
+        <!--添加车辆按钮-->
+        <Button x:Name="AddCar" Grid.Column="1" Grid.Row="2" Margin="5 0 5 0" Click="AddCar_Click">添加车辆</Button>
+
+        <!--画布-->
+        <Canvas x:Name="canvas" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" Margin="5" Background="Transparent" MouseLeftButtonDown="Canvas_MouseLeftButtonDown"/>
+
+        <!--配送点列表-->
+        <ListView x:Name="nodeList" Grid.Column="1" Grid.Row="0" Margin="5" SelectionChanged="pointList_Selected">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="50" Header="X坐标" DisplayMemberBinding="{Binding X}"/>
+                    <GridViewColumn Width="50" Header="Y坐标" DisplayMemberBinding="{Binding Y}"/>
+                    <GridViewColumn Width="50" Header="需求量" DisplayMemberBinding="{Binding Demand}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+
+        <!--车辆列表-->
+        <ListView x:Name="carList" Grid.Column="1" Grid.Row="1" Margin="5">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="70" Header="载重限制" DisplayMemberBinding="{Binding Capacity}"/>
+                    <GridViewColumn Width="70" Header="里程限制" DisplayMemberBinding="{Binding DisLimit}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+    </Grid>
+</Window>
